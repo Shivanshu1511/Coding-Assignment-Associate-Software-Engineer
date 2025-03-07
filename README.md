@@ -44,7 +44,8 @@ An interactive image slider built with vanilla JavaScript that includes:
 
 ## Technologies Used
 
+- Java
 - HTML5
 - CSS3
-- Vanilla JavaScript
-- Java
+- JavaScript
+
