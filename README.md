@@ -40,21 +40,7 @@ An interactive image slider built with vanilla JavaScript that includes:
 - Smooth transition effects
 - Support for custom image additions
 
-## Setup Instructions
 
-1. Clone this repository
-2. For Java programs:
-   - Compile using `javac filename.java`
-   - Run using `java ClassName`
-3. For web components:
-   - Open HTML files directly in a browser
-   - To use local images in the slider, ensure they're in the correct relative path
-
-## Customization
-
-- **Profile Card**: Update the profile information and image in the HTML
-- **Image Slider**: Add your own images by updating the `images` array in the JavaScript
-- **Employee System**: Modify the `Employee` objects to represent your own data
 
 ## Technologies Used
 
