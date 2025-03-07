@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .input-section {
+            display: flex;
+            margin-bottom: 20px;
+        }
+
+        #taskInput {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px 0 0 4px;
+            font-size: 16px;
+        }
+
+        #addBtn {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        #addBtn:hover {
+            background-color: #45a049;
+        }
+
+        ul {
+            list-style-type: none;
+        }
+
+        li {
+            padding: 12px 15px;
+            background-color: #f9f9f9;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.3s;
+        }
+
+        li:hover {
+            background-color: #f0f0f0;
+        }
+
+        .delete-btn {
+            background-color: #f44336;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .delete-btn:hover {
+            background-color: #d32f2f;
+        }
+
+        .empty-message {
+            text-align: center;
+            color: #888;
+            font-style: italic;
+            padding: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>To-Do List</h1>
+        <div class="input-section">
+            <input type="text" id="taskInput" placeholder="Add a new task...">
+            <button id="addBtn">Add</button>
+        </div>
+        <ul id="taskList">
+            <li class="empty-message">No tasks added yet. Add a task to get started!</li>
+        </ul>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const taskInput = document.getElementById('taskInput');
+            const addBtn = document.getElementById('addBtn');
+            const taskList = document.getElementById('taskList');
+            const emptyMessage = document.querySelector('.empty-message');
+
+            // Function to add a new task
+            function addTask() {
+                const taskText = taskInput.value.trim();
+                
+                if (taskText === '') {
+                    return; // Don't add empty tasks
+                }
+                
+                // Remove empty message if it exists
+                if (emptyMessage) {
+                    emptyMessage.remove();
+                }
+                
+                // Create list item
+                const li = document.createElement('li');
+                
+                // Create task text span
+                const taskSpan = document.createElement('span');
+                taskSpan.textContent = taskText;
+                li.appendChild(taskSpan);
+                
+                // Create delete button
+                const deleteBtn = document.createElement('button');
+                deleteBtn.textContent = 'Delete';
+                deleteBtn.className = 'delete-btn';
+                li.appendChild(deleteBtn);
+                
+                // Add list item to the task list
+                taskList.appendChild(li);
+                
+                // Clear input field
+                taskInput.value = '';
+                
+                // Focus on input field
+                taskInput.focus();
+                
+                // Attach delete event listener
+                deleteBtn.addEventListener('click', function() {
+                    li.remove();
+                    
+                    // Show empty message if no tasks left
+                    if (taskList.children.length === 0) {
+                        const emptyMsg = document.createElement('li');
+                        emptyMsg.className = 'empty-message';
+                        emptyMsg.textContent = 'No tasks yet. Add a task to get started!';
+                        taskList.appendChild(emptyMsg);
+                    }
+                });
+            }
+            
+            // Add task when Add button is clicked
+            addBtn.addEventListener('click', addTask);
+            
+            // Add task when Enter key is pressed
+            taskInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    addTask();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
